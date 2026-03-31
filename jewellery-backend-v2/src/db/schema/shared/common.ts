@@ -1,0 +1,9 @@
+import { timestamp, uuid } from "drizzle-orm/pg-core";
+
+export const timestamps = {
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at"),
+  deletedAt: timestamp("deleted_at"),
+};
+
+export const primaryId = uuid("id").defaultRandom().primaryKey();

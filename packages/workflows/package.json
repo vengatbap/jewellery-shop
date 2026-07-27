@@ -1,0 +1,22 @@
+{
+    "name": "@auric-one/workflows",
+    "version": "1.0.0",
+    "description": "Workflow orchestration",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./src/index.ts",
+            "types": "./src/index.ts"
+        }
+    },
+    "dependencies": {
+        "@auric-one/config": "workspace:*",
+        "@auric-one/core": "workspace:*",
+        "@auric-one/database": "workspace:*",
+        "@auric-one/platform": "workspace:*",
+        "@auric-one/notification": "workspace:*"
+    },
+    "devDependencies": {
+        "typescript": "^5.7.2"
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "name": "@auric-one/database",
+    "version": "1.0.0",
+    "description": "Drizzle ORM database layer with PostgreSQL schemas",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./src/index.ts",
+            "types": "./src/index.ts"
+        },
+        "./schema": {
+            "import": "./src/schema/index.ts",
+            "types": "./src/schema/index.ts"
+        },
+        "./client": {
+            "import": "./src/client.ts",
+            "types": "./src/client.ts"
+        }
+    },
+    "scripts": {
+        "generate": "drizzle-kit generate:pg",
+        "migrate": "node --loader ts-node/esm ./src/migrate.ts",
+        "seed": "node --loader ts-node/esm --experimental-specifier-resolution=node ./src/seeds/index.ts",
+        "studio": "drizzle-kit studio",
+        "push": "drizzle-kit push:pg"
+    },
+    "dependencies": {
+        "drizzle-orm": "^0.30.0",
+        "pg": "^8.11.0"
+    },
+    "devDependencies": {
+        "@auric-one/platform": "workspace:*",
+        "@auric-one/core": "workspace:*",
+        "@types/pg": "^8.11.0",
+        "drizzle-kit": "^0.20.0",
+        "typescript": "^5.3.0",
+        "ts-node": "^10.9.0"
+    }
+}

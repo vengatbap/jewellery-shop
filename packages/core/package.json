@@ -1,0 +1,26 @@
+{
+    "name": "@auric-one/core",
+    "version": "1.0.0",
+    "description": "Auric One Core Platform SDK",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./src/index.ts",
+            "types": "./src/index.ts"
+        }
+    },
+    "dependencies": {
+        "bcryptjs": "^3.0.3",
+        "express": "^4.18.0",
+        "pino": "^8.17.0",
+        "pino-pretty": "^10.3.0",
+        "uuid": "^9.0.0"
+    },
+    "devDependencies": {
+        "@types/bcryptjs": "^3.0.0",
+        "@types/express": "^4.17.21",
+        "@types/node": "^20.17.10",
+        "@types/uuid": "^9.0.8",
+        "typescript": "^5.7.2"
+    }
+}

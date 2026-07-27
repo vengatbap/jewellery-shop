@@ -1,0 +1,69 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./dist",
+        "rootDir": "../..",
+        "module": "ESNext",
+        "target": "ES2020",
+        "moduleResolution": "bundler",
+        "baseUrl": ".",
+        "paths": {
+            "@auric-one/config": [
+                "../../packages/config/src"
+            ],
+            "@auric-one/core": [
+                "../../packages/core/src"
+            ],
+            "@auric-one/database": [
+                "../../packages/database/src"
+            ],
+            "@auric-one/shared": [
+                "../../packages/shared/src"
+            ],
+            "@auric-one/validation": [
+                "../../packages/validation/src"
+            ],
+            "@auric-one/events": [
+                "../../packages/events/src"
+            ],
+            "@auric-one/workflows": [
+                "../../packages/workflows/src"
+            ],
+            "@auric-one/contracts": [
+                "../../packages/contracts/src"
+            ],
+            "@auric-one/testing": [
+                "../../packages/testing/src"
+            ],
+            "@auric-one/observability": [
+                "../../packages/observability/src"
+            ],
+            "@auric-one/platform": [
+                "../../packages/platform/src"
+            ],
+            "@auric-one/cache": [
+                "../../packages/cache/src"
+            ],
+            "@auric-one/notification": [
+                "../../packages/notification/src"
+            ],
+            "@auric-one/storage": [
+                "../../packages/storage/src"
+            ],
+            "@auric-one/registry": [
+                "../../packages/registry/src"
+            ],
+            "@auric-one/sdk": [
+                "../../packages/sdk/src"
+            ]
+        }
+    },
+    "include": [
+        "src/**/*.ts",
+        "../../packages/config/src/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}

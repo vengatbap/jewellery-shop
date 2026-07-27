@@ -14,7 +14,7 @@ export function tenantMiddleware(
     })
   }
 
-  req["tenantId"] = tenantId
+  (req as any)["tenantId"] = tenantId
 
   next()
 

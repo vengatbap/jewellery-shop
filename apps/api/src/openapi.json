@@ -1,0 +1,48 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Auric One API Gateway",
+    "version": "0.1.0-alpha",
+    "description": "API Gateway for Auric One Enterprise Jewellery Business Platform"
+  },
+  "servers": [
+    {
+      "url": "/api/v1"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Process Health Check",
+        "description": "Checks if the Node process is alive. Never queries the database.",
+        "responses": {
+          "200": {
+            "description": "Healthy"
+          }
+        }
+      }
+    },
+    "/ready": {
+      "get": {
+        "summary": "Readiness Check",
+        "description": "Checks if database and key dependencies are connected.",
+        "responses": {
+          "200": {
+            "description": "Ready"
+          }
+        }
+      }
+    },
+    "/version": {
+      "get": {
+        "summary": "Version Metadata",
+        "description": "Returns standard build version, commit hash, and environment details.",
+        "responses": {
+          "200": {
+            "description": "Version details"
+          }
+        }
+      }
+    }
+  }
+}

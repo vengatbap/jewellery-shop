@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express"
 import * as service from "./inventory.service"
-import { successResponse } from "../../utils/api-response"
 
 export const createInventoryItem = async (
   req: Request,
@@ -10,7 +9,10 @@ export const createInventoryItem = async (
   try {
     const item = await service.createInventoryItem(req.body)
 
-    return successResponse(res, item)
+    res.json({
+      success: true,
+      data: item
+    })
   } catch (error) {
     next(error)
   }
@@ -24,7 +26,10 @@ export const getInventory = async (
   try {
     const items = await service.getInventory()
 
-    return successResponse(res, items)
+    res.json({
+      success: true,
+      data: items
+    })
   } catch (error) {
     next(error)
   }
@@ -38,7 +43,10 @@ export const getInventoryItem = async (
   try {
     const item = await service.getInventoryItem(req.params.id)
 
-    return successResponse(res, item)
+    res.json({
+      success: true,
+      data: item
+    })
   } catch (error) {
     next(error)
   }

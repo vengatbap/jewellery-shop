@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: auric-postgres-dev
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: auric_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: auric-redis-dev
+    ports:
+      - "6379:6379"
+    volumes:
+      - redisdata:/data
+    restart: unless-stopped
+
+  adminer:
+    image: adminer:latest
+    container_name: auric-adminer-dev
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: auric-mailpit-dev
+    ports:
+      - "8025:8025" # Web UI
+      - "1025:1025" # SMTP Port
+    restart: unless-stopped
+
+  minio:
+    image: minio/minio:latest
+    container_name: auric-minio-dev
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadminpassword
+    command: server /data --console-address ":9001"
+    volumes:
+      - miniodata:/data
+    restart: unless-stopped
+
+  minio-init:
+    image: minio/mc:latest
+    container_name: auric-minio-init
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      until (/usr/bin/curl -s http://minio:9000/minio/health/live); do echo 'Waiting for MinIO...'; sleep 1; done;
+      /usr/bin/mc alias set local http://minio:9000 minioadmin minioadminpassword;
+      /usr/bin/mc mb -p local/avatars;
+      /usr/bin/mc mb -p local/logos;
+      /usr/bin/mc mb -p local/products;
+      /usr/bin/mc mb -p local/invoices;
+      /usr/bin/mc mb -p local/reports;
+      /usr/bin/mc mb -p local/kyc;
+      /usr/bin/mc mb -p local/barcode-labels;
+      exit 0;
+      "
+
+volumes:
+  pgdata:
+  redisdata:
+  miniodata:

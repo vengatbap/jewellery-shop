@@ -1,0 +1,20 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1785131041812,
+      "tag": "0000_fantastic_hobgoblin",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1785191676034,
+      "tag": "0001_swift_betty_ross",
+      "breakpoints": true
+    }
+  ]
+}

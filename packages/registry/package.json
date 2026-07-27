@@ -1,0 +1,16 @@
+{
+    "name": "@auric-one/registry",
+    "version": "1.0.0",
+    "description": "Auric One Shared Platform Dependency Registry",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./src/index.ts",
+            "types": "./src/index.ts"
+        }
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "typescript": "^5.7.2"
+    }
+}

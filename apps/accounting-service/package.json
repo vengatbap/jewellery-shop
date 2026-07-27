@@ -1,0 +1,15 @@
+{
+    "name": "@auric-one/accounting-service",
+    "version": "1.0.0",
+    "description": "Jewellery ERP Accounting Microservice",
+    "type": "module",
+    "main": "src/server.js",
+    "scripts": {
+        "dev": "node src/server.js",
+        "build": "node -e \"console.log('accounting-service build: no compile step required')\"",
+        "start": "node src/server.js",
+        "lint": "node -e \"console.log('accounting-service lint: not configured yet')\"",
+        "format": "node -e \"console.log('accounting-service format: not configured yet')\"",
+        "type-check": "node -e \"console.log('accounting-service type-check: not configured yet')\""
+    }
+}

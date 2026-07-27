@@ -1,0 +1,22 @@
+export const DEFAULT_PAGE_SIZE = 20;
+export const MAX_PAGE_SIZE = 100;
+export const DEFAULT_CURRENCY = 'INR';
+export const DEFAULT_TIMEZONE = 'Asia/Kolkata';
+export const DEFAULT_COUNTRY = 'IN';
+export const DEFAULT_FISCAL_YEAR_START = 1; // January
+
+// API Constants
+export const API_VERSION = 'v1';
+export const API_PREFIX = `/api/${API_VERSION}`;
+
+// Error Codes
+export const ERROR_CODES = {
+    VALIDATION_ERROR: 'VALIDATION_ERROR',
+    UNAUTHORIZED: 'UNAUTHORIZED',
+    FORBIDDEN: 'FORBIDDEN',
+    NOT_FOUND: 'NOT_FOUND',
+    CONFLICT: 'CONFLICT',
+    INTERNAL_ERROR: 'INTERNAL_ERROR',
+    TENANT_ISOLATION_ERROR: 'TENANT_ISOLATION_ERROR',
+    BRANCH_ACCESS_DENIED: 'BRANCH_ACCESS_DENIED',
+} as const;

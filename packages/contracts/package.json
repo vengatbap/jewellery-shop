@@ -1,0 +1,15 @@
+{
+    "name": "@auric-one/contracts",
+    "version": "1.0.0",
+    "description": "Auric One Shared DTO Contracts",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./src/index.ts",
+            "types": "./src/index.ts"
+        }
+    },
+    "devDependencies": {
+        "typescript": "^5.7.2"
+    }
+}

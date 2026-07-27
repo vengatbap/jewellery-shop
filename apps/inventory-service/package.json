@@ -1,0 +1,15 @@
+{
+    "name": "@auric-one/inventory-service",
+    "version": "1.0.0",
+    "description": "Jewellery ERP Inventory Microservice",
+    "type": "module",
+    "main": "src/server.js",
+    "scripts": {
+        "dev": "node src/server.js",
+        "build": "node -e \"console.log('inventory-service build: no compile step required')\"",
+        "start": "node src/server.js",
+        "lint": "node -e \"console.log('inventory-service lint: not configured yet')\"",
+        "format": "node -e \"console.log('inventory-service format: not configured yet')\"",
+        "type-check": "node -e \"console.log('inventory-service type-check: not configured yet')\""
+    }
+}

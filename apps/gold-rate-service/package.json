@@ -1,0 +1,15 @@
+{
+    "name": "@auric-one/gold-rate-service",
+    "version": "1.0.0",
+    "description": "Jewellery ERP Gold Rate Microservice",
+    "type": "module",
+    "main": "src/server.js",
+    "scripts": {
+        "dev": "node src/server.js",
+        "build": "node -e \"console.log('gold-rate-service build: no compile step required')\"",
+        "start": "node src/server.js",
+        "lint": "node -e \"console.log('gold-rate-service lint: not configured yet')\"",
+        "format": "node -e \"console.log('gold-rate-service format: not configured yet')\"",
+        "type-check": "node -e \"console.log('gold-rate-service type-check: not configured yet')\""
+    }
+}

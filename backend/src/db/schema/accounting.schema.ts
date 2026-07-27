@@ -1,3 +1,4 @@
+/*
 ├── app.ts
 ├── config/
 │   ├── database.ts
@@ -117,46 +118,9 @@
 │   │   ├── pos.controller.ts
 │   │   ├── pos.repository.ts
 │   │   ├── pos.routes.ts
-│   │   ├── pos.service.ts
-│   │   ├── pos.validation.ts
-│   │   └── types/
-│   │       └── pos.types.ts
-│   ├── pricing/
-│   │   ├── pricing.controller.ts
-│   │   ├── pricing.routes.ts
-│   │   └── pricing.service.ts
-│   ├── products/
-│   │   ├── products.controller.ts
-│   │   ├── products.repository.ts
-│   │   ├── products.routes.ts
-│   │   ├── products.service.ts
-│   │   └── products.validation.ts
-│   ├── repair/
-│   │   ├── repair.controller.ts
-│   │   ├── repair.repository.ts
-│   │   ├── repair.routes.ts
-│   │   └── repair.service.ts
-│   ├── schemes/
-│   │   ├── schemes.controller.ts
-│   │   ├── schemes.repository.ts
-│   │   ├── schemes.routes.ts
-│   │   └── schemes.service.ts
-│   ├── stock/
-│   │   ├── stock.controller.ts
-│   │   ├── stock.repository.ts
-│   │   ├── stock.routes.ts
-│   │   └── stock.service.ts
-│   ├── suppliers/
-│   │   ├── suppliers.controller.ts
-│   │   ├── suppliers.repository.ts
-│   │   ├── suppliers.routes.ts
-│   │   └── suppliers.service.ts
-│   └── users/
-│       ├── users.controller.ts
-│       ├── users.repository.ts
-│       ├── users.routes.ts
-│       ├── users.service.ts
-│       └── users.validation.ts
+...
+│   │   ├── users.service.ts
+│   │   └── users.validation.ts
 ├── server.ts
 ├── services/
 │   ├── barcode.service.ts
@@ -176,3 +140,4 @@
     ├── invoice-cleanup.worker.ts
     ├── scheme-reminder.worker.ts
     └── stock-reconciliation.worker.ts
+*/

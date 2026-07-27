@@ -1,4 +1,4 @@
-import { CustomerRepository } from "./customer.repository"
+import { CustomerRepository } from "./customers.repository"
 
 export class CustomerService {
 

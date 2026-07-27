@@ -1,0 +1,18 @@
+{
+    "name": "@auric-one/config",
+    "version": "1.0.0",
+    "description": "Environment and configuration management",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./src/index.ts",
+            "types": "./src/index.ts"
+        }
+    },
+    "dependencies": {
+        "zod": "^3.22.0"
+    },
+    "devDependencies": {
+        "typescript": "^5.3.0"
+    }
+}

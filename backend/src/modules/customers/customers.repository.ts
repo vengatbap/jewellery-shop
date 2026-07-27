@@ -1,4 +1,4 @@
-import { db } from "../../config/database"
+import { pool } from "../../config/database"
 
 export class CustomerRepository {
 
@@ -16,7 +16,7 @@ export class CustomerRepository {
       data.email
     ]
 
-    const result = await db.query(query, values)
+    const result = await pool.query(query, values)
 
     return result.rows[0]
 

@@ -1,0 +1,15 @@
+{
+    "name": "@auric-one/customer-service",
+    "version": "1.0.0",
+    "description": "Jewellery ERP Customer/CRM Microservice",
+    "type": "module",
+    "main": "src/server.js",
+    "scripts": {
+        "dev": "node src/server.js",
+        "build": "node -e \"console.log('customer-service build: no compile step required')\"",
+        "start": "node src/server.js",
+        "lint": "node -e \"console.log('customer-service lint: not configured yet')\"",
+        "format": "node -e \"console.log('customer-service format: not configured yet')\"",
+        "type-check": "node -e \"console.log('customer-service type-check: not configured yet')\""
+    }
+}

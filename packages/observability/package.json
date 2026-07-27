@@ -1,0 +1,15 @@
+{
+    "name": "@auric-one/observability",
+    "version": "1.0.0",
+    "description": "Auric One Observability metrics, traces, and metrics collectors",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./src/index.ts",
+            "types": "./src/index.ts"
+        }
+    },
+    "devDependencies": {
+        "typescript": "^5.7.2"
+    }
+}

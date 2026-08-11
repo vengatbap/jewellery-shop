@@ -1,2 +1,2 @@
-export * from './audit-writer.service';
-export * from './audit-query.service';
+export * from './audit-writer.service.js';
+export * from './audit-query.service.js';

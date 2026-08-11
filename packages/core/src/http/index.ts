@@ -1,3 +1,3 @@
-export * from './ApiResponse';
-export * from './Pagination';
-export * from './Result';
+export * from './ApiResponse.js';
+export * from './Pagination.js';
+export * from './Result.js';

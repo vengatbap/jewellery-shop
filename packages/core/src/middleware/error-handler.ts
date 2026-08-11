@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
-import { AppError } from '../errors/AppError';
-import { createErrorResponse } from '../http/ApiResponse';
-import { logger } from '../logger/logger';
+import { AppError } from '../errors/AppError.js';
+import { createErrorResponse } from '../http/ApiResponse.js';
+import { logger } from '../logger/logger.js';
 
 export function errorHandler(err: any, req: Request, res: Response, _next: NextFunction) {
     const requestId = (req.context?.requestId || req.headers['x-request-id'] || 'system') as string;

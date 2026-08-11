@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express';
 import { getExecutionContext, AuthenticationError, AuthorizationError } from '@auric-one/core';
-import { TokenService } from './token.service';
+import { TokenService } from './token.service.js';
 import { db } from '@auric-one/database';
 import { sessions } from '@auric-one/database/schema';
 import { eq, and, isNull } from 'drizzle-orm';
-import { AuthorizationService } from '../authorization/authorization.service';
+import { AuthorizationService } from '../authorization/authorization.service.js';
 
 export function requirePermission(permissionCode: string) {
     return async (_req: Request, _res: Response, next: NextFunction) => {
@@ -76,4 +76,12 @@ export async function authenticate(req: Request, _res: Response, next: NextFunct
     } catch (error) {
         next(error);
     }
+}
+
+export function requireOrganization(req: Request, _res: Response, next: NextFunction) {
+    const orgId = req.headers['x-organization-id'] || req.headers['x-tenant-id'];
+    if (!orgId) {
+        throw new AuthenticationError('Organization ID is required in request headers (x-organization-id)');
+    }
+    next();
 }

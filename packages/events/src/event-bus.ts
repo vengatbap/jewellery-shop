@@ -1,4 +1,4 @@
-import { DomainEvent } from './events';
+import { DomainEvent } from './events.js';
 
 export type EventHandler<T extends DomainEvent = DomainEvent> = (
     event: T
@@ -24,20 +24,47 @@ export class EventBus {
         };
     }
 
-    async emit<T extends DomainEvent>(event: T): Promise<void> {
-        const handlers = this.handlers.get(event.type);
+    async emit<T extends DomainEvent>(eventTypeOrEvent: string | T, payload?: Record<string, unknown>): Promise<void> {
+        let eventObj: DomainEvent;
+        if (typeof eventTypeOrEvent === 'string') {
+            eventObj = {
+                type: eventTypeOrEvent,
+                ...(payload || {}),
+            } as DomainEvent;
+        } else {
+            eventObj = eventTypeOrEvent;
+        }
+
+        const handlers = this.handlers.get(eventObj.type);
         if (!handlers) {
             return;
         }
 
         const promises = Array.from(handlers).map((handler) =>
-            handler(event).catch((error) => {
-                console.error(`Error in event handler for ${event.type}:`, error);
+            handler(eventObj).catch((error) => {
+                console.error(`Error in event handler for ${eventObj.type}:`, error);
             })
         );
 
         await Promise.all(promises);
     }
+
+    private static singletonInstance: EventBus;
+
+    static get instance(): EventBus {
+        if (!EventBus.singletonInstance) {
+            EventBus.singletonInstance = new EventBus();
+        }
+        return EventBus.singletonInstance;
+    }
+
+    static subscribe<T extends DomainEvent>(eventType: T['type'], handler: EventHandler<T>): () => void {
+        return EventBus.instance.subscribe(eventType, handler);
+    }
+
+    static async emit<T extends DomainEvent>(eventTypeOrEvent: string | T, payload?: Record<string, unknown>): Promise<void> {
+        return EventBus.instance.emit(eventTypeOrEvent, payload);
+    }
 }
 
-export const eventBus = new EventBus();
+export const eventBus = EventBus.instance;

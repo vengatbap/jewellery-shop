@@ -1,7 +1,7 @@
 import { db } from '@auric-one/database';
 import { organizations } from '@auric-one/database/schema';
 import { eq } from 'drizzle-orm';
-import { generateBusinessIdentifier } from '../identifier';
+import { generateBusinessIdentifier } from '../identifier/index.js';
 
 export class OrganizationService {
     static async create(data: { name: string; legalName: string; currency: string; timezone: string; country: string }): Promise<any> {

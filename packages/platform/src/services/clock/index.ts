@@ -1,1 +1,1 @@
-export * from './clock.service';
+export * from './clock.service.js';

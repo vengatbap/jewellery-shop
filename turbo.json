@@ -26,6 +26,9 @@
         "type-check": {
             "outputs": []
         },
+        "typecheck": {
+            "outputs": []
+        },
         "format": {
             "outputs": [],
             "cache": false

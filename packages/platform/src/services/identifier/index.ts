@@ -1,2 +1,2 @@
-export * from './identifier.service';
-export * from './identifier.types';
+export * from './identifier.service.js';
+export * from './identifier.types.js';

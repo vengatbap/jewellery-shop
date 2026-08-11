@@ -1,4 +1,4 @@
-import { getExecutionContext } from '../context/execution-context';
+import { getExecutionContext } from '../context/execution-context.js';
 
 export interface ApiResponseEnvelope<T = any> {
     success: boolean;

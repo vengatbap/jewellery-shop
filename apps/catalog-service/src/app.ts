@@ -4,13 +4,13 @@ import compression from 'compression';
 import cors from 'cors';
 import { config } from '@auric-one/config';
 import { requestId, requestLogger, errorHandler, executionContextMiddleware } from '@auric-one/core';
-import { brandsRouter } from './routes/brands';
-import { collectionsRouter } from './routes/collections';
-import { categoriesRouter } from './routes/categories';
-import { metalsRouter } from './routes/metals';
-import { puritiesRouter } from './routes/purities';
-import { countriesRouter } from './routes/countries';
-import { metaRouter } from './routes/meta';
+import { brandsRouter } from './routes/brands.js';
+import { collectionsRouter } from './routes/collections.js';
+import { categoriesRouter } from './routes/categories.js';
+import { metalsRouter } from './routes/metals.js';
+import { puritiesRouter } from './routes/purities.js';
+import { countriesRouter } from './routes/countries.js';
+import { metaRouter } from './routes/meta.js';
 
 const app: Application = express();
 

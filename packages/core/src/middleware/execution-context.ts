@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from 'express';
 import { randomUUID } from 'crypto';
 import os from 'os';
-import { runWithContext, type ExecutionContext } from '../context/execution-context';
+import { runWithContext, type ExecutionContext } from '../context/execution-context.js';
 
 const hostname = os.hostname();
 const environment = process.env.NODE_ENV || 'development';

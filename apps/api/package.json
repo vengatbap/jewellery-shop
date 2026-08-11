@@ -16,6 +16,7 @@
         "@auric-one/config": "workspace:*",
         "@auric-one/core": "workspace:*",
         "@auric-one/database": "workspace:*",
+        "@auric-one/events": "workspace:*",
         "@auric-one/platform": "workspace:*",
         "@auric-one/notification": "workspace:*",
         "@auric-one/registry": "workspace:*",

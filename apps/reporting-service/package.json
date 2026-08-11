@@ -1,0 +1,45 @@
+{
+    "name": "@auric-one/reporting-service",
+    "version": "1.0.0",
+    "description": "Auric One Reports & Analytics Microservice",
+    "type": "module",
+    "main": "dist/server.js",
+    "scripts": {
+        "dev": "node --experimental-specifier-resolution=node --loader ts-node/esm src/server.ts",
+        "build": "tsc",
+        "start": "node dist/server.js",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@auric-one/config": "workspace:*",
+        "@auric-one/core": "workspace:*",
+        "@auric-one/database": "workspace:*",
+        "@auric-one/events": "workspace:*",
+        "@auric-one/platform": "workspace:*",
+        "@auric-one/notification": "workspace:*",
+        "@auric-one/registry": "workspace:*",
+        "@auric-one/sdk": "workspace:*",
+        "@auric-one/shared": "workspace:*",
+        "@auric-one/validation": "workspace:*",
+        "@auric-one/cache": "workspace:*",
+        "express": "^4.18.2",
+        "cors": "^2.8.5",
+        "helmet": "^7.1.0",
+        "compression": "^1.7.4",
+        "express-rate-limit": "^7.1.5",
+        "uuid": "^9.0.1",
+        "pino": "^8.21.0",
+        "pino-http": "^8.6.1",
+        "zod": "^3.24.1",
+        "drizzle-orm": "^0.30.10"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.21",
+        "@types/node": "^20.17.10",
+        "@types/uuid": "^9.0.8",
+        "@types/cors": "^2.8.17",
+        "@types/compression": "^1.7.5",
+        "typescript": "^5.7.2",
+        "ts-node": "^10.9.2"
+    }
+}

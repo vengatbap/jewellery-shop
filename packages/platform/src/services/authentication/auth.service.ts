@@ -1,10 +1,10 @@
 import { db } from '@auric-one/database';
 import { users, userRoles, roles, sessions, authTokens } from '@auric-one/database/schema';
 import { eq, and, isNull } from 'drizzle-orm';
-import { PasswordService } from '../identity/password.service';
-import { TokenService } from './token.service';
+import { PasswordService } from '../identity/password.service.js';
+import { TokenService } from './token.service.js';
 import { generateRandomString } from '@auric-one/core';
-import { SessionService } from './session.service';
+import { SessionService } from './session.service.js';
 
 export interface RegisterUserData {
     organizationId: string;

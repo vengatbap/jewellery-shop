@@ -4,7 +4,7 @@ import compression from 'compression';
 import cors from 'cors';
 import { config } from '@auric-one/config';
 import { requestId, requestLogger, errorHandler, executionContextMiddleware } from '@auric-one/core';
-import { configRouter } from './routes/config';
+import { configRouter } from './routes/config.js';
 
 const app: Application = express();
 

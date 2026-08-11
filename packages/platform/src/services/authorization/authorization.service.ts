@@ -1,5 +1,5 @@
-import { PermissionService } from '../rbac/permission.service';
-import { PolicyService, PolicyContext } from '../rbac/policy.service';
+import { PermissionService } from '../rbac/permission.service.js';
+import { PolicyService, PolicyContext } from '../rbac/policy.service.js';
 
 export interface AuthorizeOptions {
     userId: string;

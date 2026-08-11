@@ -1,2 +1,2 @@
-export * from './organization.service';
-export * from './branch.service';
+export * from './organization.service.js';
+export * from './branch.service.js';

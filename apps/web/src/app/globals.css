@@ -2,10 +2,104 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-    scroll-behavior: smooth;
+@layer base {
+  :root {
+    /* Warm Ivory & Off-White Foundation */
+    --background: 40 33% 98%;      /* #FDFBF7 Light Ivory */
+    --foreground: 222 47% 11%;     /* #0F172A Dark Slate Charcoal */
+
+    --card: 0 0% 100%;             /* #FFFFFF Pure White for elevation */
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Primary Accent: Champagne Gold */
+    --primary: 38 65% 42%;         /* #B18224 Refined Gold */
+    --primary-foreground: 40 33% 98%;
+
+    --secondary: 40 25% 94%;       /* #F5F1EA Warm Neutral */
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 40 20% 95%;           /* #F6F3EE Muted Surface */
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 42 60% 94%;          /* #FAF4E5 Soft Gold Highlight */
+    --accent-foreground: 38 70% 30%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 38 20% 89%;          /* #E8E3DA Subtle Warm Border */
+    --input: 38 20% 89%;
+    --ring: 38 65% 42%;
+
+    --radius: 0.5rem;              /* 8px restrained radius */
+
+    /* Jewellery Domain Specific Pastel Tokens */
+    --jewellery-gold: 38 65% 42%;
+    --jewellery-champagne: 42 65% 94%;  /* Soft Champagne Yellow */
+    --jewellery-peach: 22 90% 94%;      /* Soft Peach */
+    --jewellery-lavender: 265 70% 95%;  /* Soft Purple Lavender */
+    --jewellery-powder: 205 80% 94%;    /* Soft Powder Blue */
+    --jewellery-pink: 340 75% 95%;      /* Soft Rose Pink */
+    --jewellery-rose: 350 80% 93%;      /* Pale Muted Rose */
+    --jewellery-mint: 145 60% 93%;      /* Soft Mint Green */
+  }
+
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+
+    --card: 224 71% 7%;
+    --card-foreground: 213 31% 91%;
+
+    --popover: 224 71% 7%;
+    --popover-foreground: 213 31% 91%;
+
+    --primary: 38 65% 55%;
+    --primary-foreground: 224 71% 4%;
+
+    --secondary: 215 28% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 215 28% 17%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+
+    --accent: 215 28% 17%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 215 28% 17%;
+    --input: 215 28% 17%;
+    --ring: 38 65% 55%;
+  }
 }
 
-body {
-    @apply bg-white text-gray-950;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1, "cv11" 1;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(180, 170, 150, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(180, 170, 150, 0.5);
 }

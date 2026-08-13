@@ -67,6 +67,7 @@
         "clean": "turbo run clean --no-cache && pnpm -r exec rm -rf node_modules dist .next"
     },
     "devDependencies": {
+        "@types/node": "^20.17.10",
         "turbo": "^2.0.0",
         "typescript": "^5.3.0",
         "ts-node": "^10.9.0"

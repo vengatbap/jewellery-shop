@@ -24,6 +24,10 @@
       }
     ],
     "allowJs": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     "incremental": true,
     "isolatedModules": true
   },

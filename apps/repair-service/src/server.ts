@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { Request, Response, Express } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
@@ -7,7 +7,7 @@ import { eq, and } from 'drizzle-orm';
 import { requireOrganization } from '@auric-one/platform';
 import { EventBus } from '@auric-one/events';
 
-const app = express();
+const app: Express = express();
 const PORT = process.env.REPAIR_SERVICE_PORT || 3016;
 
 app.use(helmet());
@@ -37,6 +37,41 @@ app.get('/api/v1/repair/jobs', async (req: Request, res: Response) => {
             .limit(50);
 
         return res.json({ success: true, data: jobs });
+    } catch (error: any) {
+        return res.status(400).json({ success: false, error: error.message });
+    }
+});
+
+// Get Single Repair Job Card by ID
+app.get('/api/v1/repair/jobs/:id', async (req: Request, res: Response) => {
+    try {
+        const orgId = req.headers['x-organization-id'] as string;
+
+        const [job] = await db
+            .select()
+            .from(repairJobCards)
+            .where(and(eq(repairJobCards.id, req.params.id), eq(repairJobCards.organizationId, orgId)));
+
+        if (!job) return res.status(404).json({ success: false, error: 'Repair job card not found' });
+
+        const items = await db
+            .select()
+            .from(repairItems)
+            .where(eq(repairItems.jobId, job.id));
+
+        const labor = await db
+            .select()
+            .from(repairLabor)
+            .where(eq(repairLabor.jobId, job.id));
+
+        return res.json({
+            success: true,
+            data: {
+                ...job,
+                items,
+                labor,
+            },
+        });
     } catch (error: any) {
         return res.status(400).json({ success: false, error: error.message });
     }
@@ -115,6 +150,36 @@ app.post('/api/v1/repair/jobs/:id/status', async (req: Request, res: Response) =
         });
 
         return res.json({ success: true, data: updatedJob });
+    } catch (error: any) {
+        return res.status(400).json({ success: false, error: error.message });
+    }
+});
+
+// Add Labor Entry to Repair Job
+app.post('/api/v1/repair/jobs/:id/labor', async (req: Request, res: Response) => {
+    try {
+        const orgId = req.headers['x-organization-id'] as string;
+        const { laborDescription, laborCost, materialsCost, totalCharge } = req.body;
+
+        const [job] = await db
+            .select()
+            .from(repairJobCards)
+            .where(and(eq(repairJobCards.id, req.params.id), eq(repairJobCards.organizationId, orgId)));
+
+        if (!job) return res.status(404).json({ success: false, error: 'Repair job card not found' });
+
+        const [laborEntry] = await db
+            .insert(repairLabor)
+            .values({
+                jobId: job.id,
+                laborDescription,
+                laborCost: laborCost || '0.00',
+                materialsCost: materialsCost || '0.00',
+                totalCharge: totalCharge || laborCost || '0.00',
+            })
+            .returning();
+
+        return res.status(201).json({ success: true, data: laborEntry });
     } catch (error: any) {
         return res.status(400).json({ success: false, error: error.message });
     }

@@ -1,4 +1,4 @@
-import { env } from './env';
+import { env } from './env.js';
 
 export const config = {
     app: {
@@ -36,4 +36,4 @@ export const config = {
 } as const;
 
 export type AppConfig = typeof config;
-export { PERMISSIONS, SYSTEM_ROLES, ROLE_PERMISSIONS } from './permissions';
+export { PERMISSIONS, SYSTEM_ROLES, ROLE_PERMISSIONS } from './permissions.js';

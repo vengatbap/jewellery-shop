@@ -5,6 +5,8 @@ build/
 out/
 .env
 .env.local
+.env.development
+.env.example
 .env.*.local
 *.log
 .DS_Store

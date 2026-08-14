@@ -1,4 +1,7 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+import Link from "next/link";
 import {
   TrendingUp,
   Receipt,
@@ -11,6 +14,11 @@ import {
   PlusCircle,
   Download,
   Calendar,
+  CheckCircle2,
+  Users,
+  Package,
+  ShoppingCart,
+  FileSpreadsheet,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -80,6 +88,8 @@ const liveMetalRates = [
 ];
 
 export function ExecutiveDashboard() {
+  const [showOnboardingBanner] = useState(true);
+
   return (
     <div className="space-y-6">
       {/* Page Header */}
@@ -89,14 +99,14 @@ export function ExecutiveDashboard() {
             Executive Retail Dashboard
           </h1>
           <p className="text-xs text-muted-foreground mt-0.5">
-            Real-time sales performance, gold rate tickers, and store operations.
+            Real-time sales performance, gold rate tickers, and store operations for Royal Gems Jewellery W.L.L.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
           <Button variant="outline" size="sm" className="h-8 text-xs gap-1.5 bg-white">
             <Calendar className="h-3.5 w-3.5 text-slate-500" />
-            Today: Aug 12, 2026
+            Today: Aug 14, 2026
           </Button>
           <Button variant="outline" size="sm" className="h-8 text-xs gap-1.5 bg-white">
             <Download className="h-3.5 w-3.5 text-slate-500" />
@@ -108,6 +118,69 @@ export function ExecutiveDashboard() {
           </Button>
         </div>
       </div>
+
+      {/* Fresh Business Onboarding Banner (Gate 21 Onboarding Guide) */}
+      {showOnboardingBanner && (
+        <Card className="p-5 bg-gradient-to-r from-[#FAF4E5] to-[#FDFBF7] border-[#B18224]/40 shadow-sm space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Sparkles className="h-5 w-5 text-[#B18224]" />
+              <h3 className="font-bold text-sm text-slate-900">
+                Welcome to your store, Ahmed 👋 — Let's complete your first sale on Auric One!
+              </h3>
+            </div>
+            <Badge variant="mint" className="text-[10px] gap-1 font-bold">
+              <CheckCircle2 className="h-3 w-3 text-emerald-600" /> STORE SETUP COMPLETED
+            </Badge>
+          </div>
+
+          <p className="text-xs text-slate-600">
+            Follow the 4 simple self-service steps below to record your opening inventory and complete your golden first sale.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-2">
+            <Link href="/customers">
+              <Card className="p-3 bg-white hover:border-[#B18224] transition-all cursor-pointer space-y-1">
+                <span className="text-[10px] font-bold text-[#B18224] flex items-center gap-1">
+                  <Users className="h-3.5 w-3.5" /> STEP 1
+                </span>
+                <p className="font-bold text-xs text-slate-900">Add First Customer</p>
+                <p className="text-[10px] text-muted-foreground">Register customer profile & KYC</p>
+              </Card>
+            </Link>
+
+            <Link href="/products">
+              <Card className="p-3 bg-white hover:border-[#B18224] transition-all cursor-pointer space-y-1">
+                <span className="text-[10px] font-bold text-[#B18224] flex items-center gap-1">
+                  <Package className="h-3.5 w-3.5" /> STEP 2
+                </span>
+                <p className="font-bold text-xs text-slate-900">Create Product Template</p>
+                <p className="text-[10px] text-muted-foreground">e.g. Royal Heritage Ring (22K)</p>
+              </Card>
+            </Link>
+
+            <Link href="/inventory">
+              <Card className="p-3 bg-white hover:border-[#B18224] transition-all cursor-pointer space-y-1">
+                <span className="text-[10px] font-bold text-[#B18224] flex items-center gap-1">
+                  <FileSpreadsheet className="h-3.5 w-3.5" /> STEP 3
+                </span>
+                <p className="font-bold text-xs text-slate-900">Add Opening Stock Tag</p>
+                <p className="text-[10px] text-muted-foreground">Scan tag JR000001 (5.500g)</p>
+              </Card>
+            </Link>
+
+            <Link href="/pos">
+              <Card className="p-3 bg-[#B18224] text-white hover:bg-[#966D1C] transition-all cursor-pointer space-y-1">
+                <span className="text-[10px] font-bold text-amber-200 flex items-center gap-1">
+                  <ShoppingCart className="h-3.5 w-3.5" /> STEP 4
+                </span>
+                <p className="font-bold text-xs">Complete First Sale</p>
+                <p className="text-[10px] text-amber-100">Issue POS Invoice INV-000001</p>
+              </Card>
+            </Link>
+          </div>
+        </Card>
+      )}
 
       {/* 4 Primary KPI Pastel Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

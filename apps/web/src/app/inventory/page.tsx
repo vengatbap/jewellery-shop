@@ -16,7 +16,6 @@ import {
   Boxes,
   Search,
   Plus,
-  Download,
   CheckCircle2,
   RefreshCw,
   X,
@@ -24,6 +23,7 @@ import {
   Scale,
   ShieldAlert,
   History,
+  FileSpreadsheet,
 } from "lucide-react";
 
 export default function InventoryPage() {
@@ -34,6 +34,8 @@ export default function InventoryPage() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const [isAdjustOpen, setIsAdjustOpen] = useState(false);
+  const [isOpeningStockOpen, setIsOpeningStockOpen] = useState(false);
+
   const [submittingAdjustment, setSubmittingAdjustment] = useState(false);
   const [validationError, setValidationError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -46,6 +48,12 @@ export default function InventoryPage() {
   const [adjustType, setAdjustType] = useState("RETURN_RESTOCK");
   const [adjustReason, setAdjustReason] = useState("");
   const [adjustWeight, setAdjustWeight] = useState("");
+
+  // Opening Stock State
+  const [openingBarcode, setOpeningBarcode] = useState("JR000001");
+  const [openingDescription, setOpeningDescription] = useState("Royal Heritage Ring (22K)");
+  const [openingNetWeight, setOpeningNetWeight] = useState("5.500");
+  const [openingBranch, setOpeningBranch] = useState("MAIN01 - Main Branch");
 
   const fetchMovements = useCallback(async () => {
     setIsLoading(true);
@@ -64,6 +72,37 @@ export default function InventoryPage() {
   useEffect(() => {
     fetchMovements();
   }, [fetchMovements]);
+
+  const handleOpeningStockSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setValidationError(null);
+
+    const wt = parseFloat(openingNetWeight);
+    if (isNaN(wt) || wt <= 0) {
+      setValidationError("Net Gold Weight must be a positive number.");
+      return;
+    }
+
+    setSubmittingAdjustment(true);
+    await new Promise((resolve) => setTimeout(resolve, 400));
+    setSubmittingAdjustment(false);
+
+    const newMov = {
+      id: `MOV-OPEN-${Math.floor(100 + Math.random() * 900)}`,
+      barcode: openingBarcode.trim(),
+      type: "OPENING_STOCK",
+      weight: wt,
+      source: "Opening Balance Intake",
+      destination: openingBranch,
+      date: new Date().toISOString().slice(0, 19).replace("T", " "),
+      status: "IN_STOCK",
+      reason: `Opening stock intake: ${openingDescription}`,
+    };
+
+    setSuccessMessage(`Opening stock item ${openingBarcode} (${openingDescription}, ${wt}g 22K) added to ${openingBranch} Vault!`);
+    setMovements((prev) => [newMov, ...prev]);
+    setIsOpeningStockOpen(false);
+  };
 
   const handleStockAdjustment = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -128,10 +167,10 @@ export default function InventoryPage() {
           <div>
             <h1 className="text-xl font-bold tracking-tight text-slate-900 flex items-center gap-2">
               <Boxes className="h-5 w-5 text-[#B18224]" />
-              Inventory Movements & Stock Ledger
+              Inventory Movements & Opening Stock Ledger
             </h1>
             <p className="text-xs text-muted-foreground mt-0.5">
-              Track physical stock movements, GRN receipts, branch transfers, and return restocks.
+              Track physical stock movements, opening stock intake, GRN receipts, and branch transfers.
             </p>
           </div>
 
@@ -140,9 +179,17 @@ export default function InventoryPage() {
               <RefreshCw className="h-3.5 w-3.5" />
               Refresh
             </Button>
-            <Button variant="outline" size="sm" className="h-8 text-xs gap-1.5 bg-white">
-              <Download className="h-3.5 w-3.5" />
-              Stock Audit Report
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                setValidationError(null);
+                setIsOpeningStockOpen(true);
+              }}
+              className="h-8 text-xs gap-1.5 bg-white border-[#B18224]/50 text-[#8C6B1B]"
+            >
+              <FileSpreadsheet className="h-3.5 w-3.5" />
+              Add Opening Stock
             </Button>
             <Button
               size="sm"
@@ -164,6 +211,81 @@ export default function InventoryPage() {
             <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />
             <span>{successMessage}</span>
           </div>
+        )}
+
+        {/* Opening Stock Intake Modal */}
+        {isOpeningStockOpen && (
+          <Card className="p-5 border-[#B18224]/40 bg-[#FDFBF7]">
+            <form onSubmit={handleOpeningStockSubmit} className="space-y-4">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-bold text-slate-900">Add Opening Stock Intake (Existing Jewellery Items)</h3>
+                <Button variant="ghost" size="sm" onClick={() => setIsOpeningStockOpen(false)} className="h-6 w-6 p-0">
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+
+              {validationError && (
+                <div className="p-2.5 rounded bg-rose-50 border border-rose-200 text-rose-800 text-xs font-medium flex items-center gap-2">
+                  <ShieldAlert className="h-4 w-4 text-rose-600 shrink-0" />
+                  <span>{validationError}</span>
+                </div>
+              )}
+
+              <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+                <div>
+                  <label className="text-[11px] font-semibold text-slate-700 block mb-1">Barcode Tag</label>
+                  <Input
+                    required
+                    value={openingBarcode}
+                    onChange={(e) => setOpeningBarcode(e.target.value)}
+                    placeholder="e.g. JR000001"
+                    className="h-8 text-xs bg-white font-mono"
+                  />
+                </div>
+                <div>
+                  <label className="text-[11px] font-semibold text-slate-700 block mb-1">Item Description</label>
+                  <Input
+                    required
+                    value={openingDescription}
+                    onChange={(e) => setOpeningDescription(e.target.value)}
+                    placeholder="e.g. Royal Heritage Ring"
+                    className="h-8 text-xs bg-white"
+                  />
+                </div>
+                <div>
+                  <label className="text-[11px] font-semibold text-slate-700 block mb-1">Net Gold Weight (g)</label>
+                  <Input
+                    type="number"
+                    step="0.001"
+                    required
+                    value={openingNetWeight}
+                    onChange={(e) => setOpeningNetWeight(e.target.value)}
+                    placeholder="e.g. 5.500"
+                    className="h-8 text-xs bg-white font-mono"
+                  />
+                </div>
+                <div>
+                  <label className="text-[11px] font-semibold text-slate-700 block mb-1">Target Vault Branch</label>
+                  <Input
+                    required
+                    value={openingBranch}
+                    onChange={(e) => setOpeningBranch(e.target.value)}
+                    placeholder="e.g. MAIN01 - Main Branch"
+                    className="h-8 text-xs bg-white"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-end gap-2 pt-2 border-t border-border/40">
+                <Button type="button" variant="outline" size="sm" onClick={() => setIsOpeningStockOpen(false)} className="h-8 text-xs bg-white">
+                  Cancel
+                </Button>
+                <Button type="submit" disabled={submittingAdjustment} size="sm" className="h-8 text-xs bg-[#B18224] text-white font-medium">
+                  {submittingAdjustment ? "Posting Opening Balance..." : "Post Opening Stock"}
+                </Button>
+              </div>
+            </form>
+          </Card>
         )}
 
         {/* Adjustment Modal Form */}

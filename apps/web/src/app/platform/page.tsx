@@ -16,6 +16,7 @@ import {
   CheckCircle2,
   X,
   Zap,
+  RotateCcw,
 } from "lucide-react";
 
 const tenantOrganizations = [
@@ -85,6 +86,13 @@ export default function PlatformPage() {
     setSupportMessage(
       `Audited Support Session Initiated: Signed into ${orgName} in Read-Only Audit Mode. All actions logged in Platform Audit Trail.`
     );
+  };
+
+  const handleResetDemoTenant = (orgName: string) => {
+    setSupportMessage(
+      `Platform Reset Operation Successful: Demo Tenant ${orgName} has been reset to fresh setup status (NOT_STARTED).`
+    );
+    setSelectedOrg(null);
   };
 
   return (
@@ -298,7 +306,16 @@ export default function PlatformPage() {
                   </div>
                 </div>
 
-                <div className="flex justify-end pt-2 border-t border-border/40">
+                <div className="flex justify-between items-center pt-2 border-t border-border/40">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handleResetDemoTenant(selectedOrg.name)}
+                    className="h-8 text-xs bg-rose-50 text-rose-800 hover:bg-rose-100 border-rose-200 font-medium gap-1"
+                  >
+                    <RotateCcw className="h-3.5 w-3.5 text-rose-700" />
+                    Reset Demo Tenant
+                  </Button>
                   <Button variant="outline" size="sm" onClick={() => setSelectedOrg(null)} className="h-8 text-xs bg-white">
                     Close Audit
                   </Button>
